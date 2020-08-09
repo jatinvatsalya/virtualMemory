@@ -355,6 +355,12 @@ int process_page_access_lfu(
                         smallestRC = page_table[i].reference_count;
                         iSmallestRC = i;
                     }
+                    else if ( (smallestRC == page_table[i].reference_count) &&
+                             (page_table[iSmallestRC].arrival_timestamp > page_table[i].arrival_timestamp))
+                    {
+                        smallestRC = page_table[i].reference_count;
+                        iSmallestRC = i;
+                    }
                 }
             }
         }
@@ -455,5 +461,3 @@ int count_page_faults_lfu(
 
     return result;
 }
-
-
